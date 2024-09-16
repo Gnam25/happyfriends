@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Created-By: IntelliJ IDEA
+Built-By: Kevin_Menjivar
+Build-Jdk: 17.0.12
+Implementation-Title: happyfriends
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: sv.edu.ufg.happyfriends
+Main-Class: ${start-class}
+
