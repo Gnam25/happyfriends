@@ -13,6 +13,24 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@NamedStoredProcedureQuery(
+        name = "sp_get_razas",
+        procedureName = "sp_get_razas",
+        resultSetMappings = "razaMap",
+        parameters = {
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_idmascota", type = Integer.class)
+        }
+)
+@SqlResultSetMapping(
+        name = "razaMap",
+        classes = @ConstructorResult(
+                targetClass = Raza.class,
+                columns = {
+                        @ColumnResult(name = "razId", type = Integer.class),
+                        @ColumnResult(name = "razNombre", type = String.class)
+                }
+        )
+)
 public class Raza {
 
     @Id
