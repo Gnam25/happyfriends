@@ -80,7 +80,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		<finalName>happyfriendsv0.0.7</finalName>
+		<finalName>happyfriendsV0.0.9</finalName>
 	</build>
 
 </project>
