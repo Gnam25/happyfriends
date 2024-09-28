@@ -13,6 +13,21 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@NamedStoredProcedureQuery(
+        name = "sp_get_tipo_mascota",
+        procedureName = "sp_get_tipo_mascota",
+        resultSetMappings = "TPMMap"
+)
+@SqlResultSetMapping(
+        name = "TPMMap",
+        classes = @ConstructorResult(
+                targetClass = TipoMascota.class,
+                columns = {
+                        @ColumnResult(name = "timId", type = Integer.class),
+                        @ColumnResult(name = "timGrupo", type = String.class)
+                }
+        )
+)
 public class TipoMascota {
     @Id
     private Integer timId;
@@ -40,4 +55,5 @@ public class TipoMascota {
     //Un tipo de mascota tiene muchas razas
     @OneToMany(mappedBy = "tipoMascota", cascade = CascadeType.ALL)
     private List<Raza> raza;
+
 }
