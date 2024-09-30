@@ -59,10 +59,10 @@ public class ExpedienteService {
 
         } catch (PersistenceException ex) {
             // Manejar errores de la base de datos, como problemas de conexión o constraints
-            throw new CustomException("Error al insertar el pedido en la base de datos", ex);
+            throw new CustomException("Error al insertar el expeidente en la base de datos", ex);
         } catch (Exception ex) {
             // Manejar cualquier otra excepción
-            throw new CustomException("Error inesperado al insertar el pedido", ex);
+            throw new CustomException("Error inesperado al expediente el pedido", ex);
         }
     }
 
