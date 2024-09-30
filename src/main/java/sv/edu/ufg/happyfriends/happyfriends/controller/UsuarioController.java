@@ -1,5 +1,6 @@
 package sv.edu.ufg.happyfriends.happyfriends.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import sv.edu.ufg.happyfriends.happyfriends.entity.Expediente;
@@ -19,8 +20,8 @@ public class UsuarioController {
 
     private final UsuarioService usuarioService;
 
-    @GetMapping("/signin")
-    public Rol getPermisobyRol(@RequestBody UsuarioConverter usuario) {
+    @PostMapping("/signin")
+    public Rol getPermisobyRol(@Valid @RequestBody UsuarioConverter usuario) {
         return usuarioService.validarUsuario(usuario.getUsuEmail(), usuario.getUsuPassword());
         /*List<Rol> roles = usuarioService.validarUsuario(usuario.getEmail(), usuario.getPassword());
         Rol rol = new Rol();

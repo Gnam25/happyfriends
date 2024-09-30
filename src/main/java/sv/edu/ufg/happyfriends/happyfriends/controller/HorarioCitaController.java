@@ -18,7 +18,7 @@ public class HorarioCitaController {
 
     private final HorarioCitaService horarioCitaService;
 
-    @GetMapping("/horarios")
+    @PostMapping("/horarios")
     public List<HorarioCita> getHorarioCita(@RequestBody HorarioCita horarioCita) {
         List<HorarioCita> horarios = horarioCitaService.getHorarioCita(horarioCita.getHocFecha(), horarioCita.getEmpId());
         return horarios;

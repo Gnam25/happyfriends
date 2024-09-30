@@ -17,7 +17,8 @@ import lombok.Setter;
                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_USU_EMAIL", type = String.class),
                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_USU_PASSWORD", type = String.class),
                 @StoredProcedureParameter(mode = ParameterMode.OUT, name = "p_ROL_ID", type = Integer.class),
-                @StoredProcedureParameter(mode = ParameterMode.OUT, name = "p_ROL_NOMBRE", type = String.class)
+                @StoredProcedureParameter(mode = ParameterMode.OUT, name = "p_ROL_NOMBRE", type = String.class),
+                @StoredProcedureParameter(mode = ParameterMode.OUT, name = "p_USU_CORRELATIVO", type = String.class)
         }
 )
 public class UsuarioConverter {

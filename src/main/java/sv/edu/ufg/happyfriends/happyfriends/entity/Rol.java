@@ -11,9 +11,11 @@ public class Rol {
 
     private Integer rolId;
     private String rolNombre;
+    private String usuCorreltivo;
 
-    public Rol(Integer rolId, String rolNombre) {
+    public Rol(Integer rolId, String rolNombre, String usuCorreltivo) {
         this.rolId = rolId;
         this.rolNombre = rolNombre;
+        this.usuCorreltivo = usuCorreltivo;
     }
 }
