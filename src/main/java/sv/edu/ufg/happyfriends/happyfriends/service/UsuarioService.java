@@ -2,7 +2,9 @@ package sv.edu.ufg.happyfriends.happyfriends.service;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.ParameterMode;
+import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.StoredProcedureQuery;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -20,9 +22,10 @@ import java.util.List;
 public class UsuarioService {
 
     //private final JdbcTemplate jdbcTemplate;
-    @Autowired
+    @PersistenceContext
     private EntityManager entityManager;
 
+    @Transactional
     public Rol validarUsuario(String email, String pass) {
         StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_validar_usuario");
         query.registerStoredProcedureParameter("p_USU_EMAIL", String.class, ParameterMode.IN);
