@@ -23,8 +23,4 @@ public class HorarioCitaController {
         List<HorarioCita> horarios = horarioCitaService.getHorarioCita(horarioCita.getHocFecha(), horarioCita.getEmpId());
         return horarios;
     }
-    /*@PostMapping("/repuestos")
-    public Expediente insertExpediente(@Valid @RequestBody Expediente nuevoRepuesto) {
-        return expedienteService.insertExpediente(nuevoRepuesto);
-    }*/
 }
