@@ -1,6 +1,7 @@
 package sv.edu.ufg.happyfriends.happyfriends.service;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.PersistenceException;
 import jakarta.persistence.StoredProcedureQuery;
 import jakarta.transaction.Transactional;
@@ -24,7 +25,7 @@ public class TipoMascotaService {
 
     private final TipoMascotaRepository tipoMscotaRepository;
 
-    @Autowired
+    @PersistenceContext
     private EntityManager entityManager;
 
     @Transactional

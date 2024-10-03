@@ -19,7 +19,7 @@ public class CitaService {
 
     private final CitaRepository citaRepository;
 
-    @Autowired
+    @PersistenceContext
     private EntityManager entityManager;
 
     @Transactional

@@ -2,6 +2,7 @@ package sv.edu.ufg.happyfriends.happyfriends.service;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.ParameterMode;
+import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.StoredProcedureQuery;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,7 @@ public class RazaService {
 
     private final RazaRepository razaRepository;
 
-    @Autowired
+    @PersistenceContext
     private EntityManager entityManager;
 
     @Transactional
