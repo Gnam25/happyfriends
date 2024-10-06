@@ -18,6 +18,7 @@ import java.util.Date;
         parameters = {
                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_MAS_NOMBRE", type = String.class),
                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_MAS_PROPIETARIO", type = String.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_MAS_CORREO", type = String.class),
                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_MAS_GENERO", type = Integer.class),
                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_MAS_COLOR", type = String.class),
                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_MAS_PESO", type = String.class),
@@ -27,7 +28,9 @@ import java.util.Date;
                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_MAS_TELEFONO", type = String.class),
                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_MAS_MEDREFERIDO", type = String.class),
                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_RAZ_ID", type = Integer.class),
-                @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_USU_CODIGO", type = String.class)
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_USU_CODIGO", type = String.class),
+                @StoredProcedureParameter(mode = ParameterMode.OUT, name = "p_MAS_ID", type = String.class),
+                @StoredProcedureParameter(mode = ParameterMode.OUT, name = "p_INSERT_RESPONSE", type = String.class)
         }
 )
 public class Expediente {
@@ -48,6 +51,10 @@ public class Expediente {
     @NotBlank
     @Column(nullable = false)
     private String masPropietario;
+
+    @NotBlank
+    @Column(nullable = false)
+    private String masCorreo;
 
     @NotBlank
     @Column(nullable = false)
