@@ -26,6 +26,15 @@ import java.util.Date;
                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "USU_CODIGO", type = String.class)
         }
 )
+@NamedStoredProcedureQuery(
+        name = "sp_update_cita",
+        procedureName = "sp_update_cita",
+        parameters = {
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_id", type = Integer.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_fechahora", type = Date.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_propietario", type = String.class)
+        }
+)
 public class Cita {
 
     @Id
