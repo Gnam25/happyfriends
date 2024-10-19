@@ -1,12 +1,15 @@
 package sv.edu.ufg.happyfriends.happyfriends.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import sv.edu.ufg.happyfriends.happyfriends.utils.CustomTimeDeserializer;
 
+import java.sql.Time;
 import java.util.Date;
 
 @Entity
@@ -32,6 +35,7 @@ import java.util.Date;
         parameters = {
                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_id", type = Integer.class),
                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_fechahora", type = Date.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_hora", type = Time.class),
                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_propietario", type = String.class)
         }
 )
@@ -45,6 +49,10 @@ public class Cita {
     @NotBlank
     @Column(nullable = false)
     private String ctaFecHora;
+
+    @NotBlank
+    @Column(nullable = false)
+    private String ctaHora;
 
     @NotBlank
     @Column(nullable = false)
