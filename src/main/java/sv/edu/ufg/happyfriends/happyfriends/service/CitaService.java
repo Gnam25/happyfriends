@@ -69,17 +69,20 @@ public class CitaService {
         try {
             StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_update_cita");
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            SimpleDateFormat formatterTime = new SimpleDateFormat("HH:mm:ss");
             Calendar calendar       = Calendar.getInstance();
             java.util.Date now      = calendar.getTime();
 
             // Registrar parámetros
             query.registerStoredProcedureParameter("p_id", Integer.class, jakarta.persistence.ParameterMode.IN);
             query.registerStoredProcedureParameter("p_fechahora", Date.class, jakarta.persistence.ParameterMode.IN);
+            query.registerStoredProcedureParameter("p_hora", Time.class, jakarta.persistence.ParameterMode.IN);
             query.registerStoredProcedureParameter("p_propietario", String.class, jakarta.persistence.ParameterMode.IN);
 
             // Establecer valores
             query.setParameter("p_id", cita.getCtaCodigo());
             query.setParameter("p_fechahora", formatter.parse(cita.getCtaFecHora()));
+            query.setParameter("p_hora", formatterTime.parse(cita.getCtaHora()));
             query.setParameter("p_propietario", cita.getCtaPropietario());
 
             // Ejecutar el procedimiento
@@ -112,7 +115,7 @@ public class CitaService {
         if (!resultList.isEmpty()) {
             for (Object[] row : resultList) {
                 // Crear la instancia de CitaSearchConverter
-                CitaSearchConverter temp = new CitaSearchConverter((Date) row[0], (Time) row[1], (String) row[2], (String) row[3]);
+                CitaSearchConverter temp = new CitaSearchConverter((Integer) row[0], (Date) row[1], (Time) row[2], (String) row[3], (String) row[4]);
                 // Agregar el resultado convertido a la lista
                 resultado.add(temp);
             }
