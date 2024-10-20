@@ -123,4 +123,40 @@ public class CitaService {
         return resultado;
     }
 
+    @Transactional
+    public String cancelarCita(Cita cita) {
+        try {
+            StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_cancelar_cita");
+
+            // Registrar parámetros
+            query.registerStoredProcedureParameter("p_CTA_ID", Integer.class, jakarta.persistence.ParameterMode.IN);
+            query.registerStoredProcedureParameter("p_USU_CODIGO", String.class, jakarta.persistence.ParameterMode.IN);
+            query.registerStoredProcedureParameter("p_RESPUESTA", String.class, jakarta.persistence.ParameterMode.OUT);
+
+            // Establecer valores
+            query.setParameter("p_CTA_ID", cita.getCtaCodigo());
+            query.setParameter("p_USU_CODIGO", cita.getUsuCodigo());
+
+            // Ejecutar el procedimiento
+            query.execute();
+
+            String respuesta = (String) query.getOutputParameterValue("p_RESPUESTA");
+
+            if (respuesta.equals("00")) {
+                respuesta = "Cita cancelada";
+            }else{
+                respuesta = "Error al cancelar su cita no existe, esta inactiva o cancelada";
+            }
+
+            return respuesta;
+
+        } catch (PersistenceException ex) {
+            // Manejar errores de la base de datos, como problemas de conexión o constraints
+            throw new CustomException("Error al cancelar la cita en la base de datos. ", ex);
+        } catch (Exception ex) {
+            // Manejar cualquier otra excepción
+            throw new CustomException("Error inesperado al cancelar la cita. ", ex);
+        }
+    }
+
 }
