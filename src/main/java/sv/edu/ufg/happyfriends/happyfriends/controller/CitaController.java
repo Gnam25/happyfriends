@@ -35,4 +35,10 @@ public class CitaController {
         List<CitaSearchConverter> citas = citaService.buscarCitaList(cita);
         return citas;
     }
+
+    @PostMapping("/cancelarCita")
+    public String cancelarCita(@RequestBody Cita cita) {
+        String response = citaService.cancelarCita(cita);
+        return response;
+    }
 }

@@ -39,6 +39,15 @@ import java.util.Date;
                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_propietario", type = String.class)
         }
 )
+@NamedStoredProcedureQuery(
+        name = "sp_cancelar_cita",
+        procedureName = "sp_cancelar_cita",
+        parameters = {
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_CTA_ID", type = Integer.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_USU_CODIGO", type = String.class),
+                @StoredProcedureParameter(mode = ParameterMode.OUT, name = "p_RESPUESTA", type = String.class)
+        }
+)
 public class Cita {
 
     @Id
