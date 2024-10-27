@@ -25,9 +25,9 @@ public class CitaController {
     }
 
     @PostMapping("/actualizarCita")
-    public ResponseEntity<String> actualizarCita(@RequestBody Cita cita) {
-        citaService.actualizarCita(cita);
-        return ResponseEntity.ok("Cita actualizada con exito");
+    public String actualizarCita(@RequestBody Cita cita) {
+        String response = citaService.actualizarCita(cita);
+        return response;
     }
 
     @PostMapping("/buscarCita")

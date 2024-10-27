@@ -36,7 +36,8 @@ import java.util.Date;
                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_id", type = Integer.class),
                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_fechahora", type = Date.class),
                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_hora", type = Time.class),
-                @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_propietario", type = String.class)
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_propietario", type = String.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_veterinario_id", type = Integer.class)
         }
 )
 @NamedStoredProcedureQuery(

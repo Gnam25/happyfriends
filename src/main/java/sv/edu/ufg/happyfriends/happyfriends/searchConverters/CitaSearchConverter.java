@@ -34,6 +34,13 @@ public class CitaSearchConverter {
     private String propietario;
     private String veterinario;
 
+    public CitaSearchConverter(Date fecha, Time hora, String propietario) {
+        this.id = id;
+        this.fecha = fecha;
+        this.hora = hora;
+        this.propietario = propietario;
+    }
+
     public CitaSearchConverter(Integer id, Date fecha, Time hora, String propietario, String veterinario) {
         this.id = id;
         this.fecha = fecha;
