@@ -25,14 +25,20 @@ public class CitaController {
     }
 
     @PostMapping("/actualizarCita")
-    public ResponseEntity<String> actualizarCita(@RequestBody Cita cita) {
-        citaService.actualizarCita(cita);
-        return ResponseEntity.ok("Cita actualizada con exito");
+    public String actualizarCita(@RequestBody Cita cita) {
+        String response = citaService.actualizarCita(cita);
+        return response;
     }
 
     @PostMapping("/buscarCita")
     public List<CitaSearchConverter> buscarCitaList(@RequestBody CitaSearchConverter cita) {
         List<CitaSearchConverter> citas = citaService.buscarCitaList(cita);
         return citas;
+    }
+
+    @PostMapping("/cancelarCita")
+    public String cancelarCita(@RequestBody Cita cita) {
+        String response = citaService.cancelarCita(cita);
+        return response;
     }
 }
