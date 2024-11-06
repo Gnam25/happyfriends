@@ -107,6 +107,7 @@ public class ExpedienteService {
             query.registerStoredProcedureParameter("p_INSERT_RESPONSE", String.class, ParameterMode.OUT);
 
             // Establecer valores
+            query.setParameter("p_MAS_ID", expediente.getMasId());
             query.setParameter("p_MAS_NOMBRE", expediente.getMasNombre());
             query.setParameter("p_MAS_PROPIETARIO", expediente.getMasPropietario());
             query.setParameter("p_MAS_CORREO", expediente.getMasCorreo());
