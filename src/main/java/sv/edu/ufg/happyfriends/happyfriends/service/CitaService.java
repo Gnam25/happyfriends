@@ -117,17 +117,19 @@ public class CitaService {
         query.registerStoredProcedureParameter("p_fecha", Date.class, ParameterMode.IN);
         query.registerStoredProcedureParameter("p_hora", Time.class, ParameterMode.IN);
         query.registerStoredProcedureParameter("p_propietario", String.class, ParameterMode.IN);
+        query.registerStoredProcedureParameter("p_estado", String.class, ParameterMode.IN);
 
         query.setParameter("p_fecha", cita.getFecha());
         query.setParameter("p_hora", cita.getHora());
         query.setParameter("p_propietario", cita.getPropietario());
+        query.setParameter("p_estado", cita.getEstadoIn());
         query.execute();
 
         List<Object[]> resultList = query.getResultList();
         if (!resultList.isEmpty()) {
             for (Object[] row : resultList) {
                 // Crear la instancia de CitaSearchConverter
-                CitaSearchConverter temp = new CitaSearchConverter((Integer) row[0], (Date) row[1], (Time) row[2], (String) row[3], (String) row[4]);
+                CitaSearchConverter temp = new CitaSearchConverter((Integer) row[0], (Date) row[1], (Time) row[2], (String) row[3], (String) row[4], (Integer) row[5]);
                 // Agregar el resultado convertido a la lista
                 resultado.add(temp);
             }
@@ -157,7 +159,7 @@ public class CitaService {
             if (respuesta.equals("00")) {
                 respuesta = "Cita cancelada";
             }else{
-                respuesta = "Error al cancelar su cita no existe, esta inactiva o cancelada";
+                respuesta = "Error al cancelar su cita no existe, esta vencida, esta en proceso o esta cancelada";
             }
 
             return respuesta;

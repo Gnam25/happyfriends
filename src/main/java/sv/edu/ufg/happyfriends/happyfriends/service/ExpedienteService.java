@@ -155,7 +155,8 @@ public class ExpedienteService {
         if (!resultList.isEmpty()) {
             for (Object[] row : resultList) {
                 // Crear la instancia de ExpedienteSearchConverter
-                ExpedienteSearchConverter temp = new ExpedienteSearchConverter((String) row[0], (String) row[1], (String) row[2], (String) row[3], (String) row[4], (String) row[5]);
+                ExpedienteSearchConverter temp = new ExpedienteSearchConverter((String) row[0], (String) row[1], (String) row[2], (String) row[3], (String) row[4], (String) row[5]
+                        , (Integer) row[6], (Integer) row[7], (String) row[8], (String) row[9], (String) row[10], (String) row[11], (String) row[12], (String) row[13], (String) row[14]);
                 // Agregar el resultado convertido a la lista
                 resultado.add(temp);
             }
