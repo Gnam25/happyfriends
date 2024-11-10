@@ -21,7 +21,8 @@ import java.util.Date;
         parameters = {
                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_fecha", type = Date.class),
                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_hora", type = Time.class),
-                @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_propietario", type = String.class)
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_propietario", type = String.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_estado", type = String.class)
         }
 )
 public class CitaSearchConverter {
@@ -33,6 +34,8 @@ public class CitaSearchConverter {
     private Time hora;
     private String propietario;
     private String veterinario;
+    private String estadoIn;
+    private Integer estado;
 
     public CitaSearchConverter(Date fecha, Time hora, String propietario) {
         this.id = id;
@@ -41,11 +44,12 @@ public class CitaSearchConverter {
         this.propietario = propietario;
     }
 
-    public CitaSearchConverter(Integer id, Date fecha, Time hora, String propietario, String veterinario) {
+    public CitaSearchConverter(Integer id, Date fecha, Time hora, String propietario, String veterinario, Integer estado) {
         this.id = id;
         this.fecha = fecha;
         this.hora = hora;
         this.propietario = propietario;
         this.veterinario = veterinario;
+        this.estado = estado;
     }
 }
