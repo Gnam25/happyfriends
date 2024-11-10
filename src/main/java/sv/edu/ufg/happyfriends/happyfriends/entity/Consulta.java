@@ -71,4 +71,13 @@ public class Consulta {
     @NotBlank
     @Column(nullable = false)
     private String usuCodigo;
+
+    public Consulta(String conFecConsulta, String conSintomas, String conDiagnostico, String conExamenes, String conObservaciones, String empNombre) {
+        this.conFecConsulta = conFecConsulta;
+        this.conSintomas = conSintomas;
+        this.conDiagnostico = conDiagnostico;
+        this.conExamenes = conExamenes;
+        this.conObservaciones = conObservaciones;
+        this.empNombre = empNombre;
+    }
 }

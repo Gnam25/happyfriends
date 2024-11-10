@@ -5,7 +5,10 @@ import org.springframework.web.bind.annotation.*;
 import sv.edu.ufg.happyfriends.happyfriends.entity.Consulta;
 import sv.edu.ufg.happyfriends.happyfriends.entity.Expediente;
 import sv.edu.ufg.happyfriends.happyfriends.entityConverters.PostResponseConverter;
+import sv.edu.ufg.happyfriends.happyfriends.searchConverters.ExpedienteSearchConverter;
 import sv.edu.ufg.happyfriends.happyfriends.service.ConsultaService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/happyfriends")
@@ -17,6 +20,12 @@ public class ConsultaController {
     @PostMapping("/nuevaConsulta")
     public PostResponseConverter insertConsulta(@RequestBody Consulta consulta) {
         return consultaService.insertConsulta(consulta);
-        //return ResponseEntity.ok("Expediente creado con exito");
     }
+
+    @GetMapping("/buscarHistorialMedico/{expId}")
+    public List<Consulta> buscarHistorialMedicoList(@PathVariable("expId") Integer expId) {
+        List<Consulta> consultas = consultaService.buscarHistorialMedicoList(expId);
+        return consultas;
+    }
+
 }
