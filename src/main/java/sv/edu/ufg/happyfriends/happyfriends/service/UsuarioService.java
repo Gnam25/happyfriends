@@ -33,6 +33,8 @@ public class UsuarioService {
         query.registerStoredProcedureParameter("p_ROL_ID", Integer.class, ParameterMode.OUT);
         query.registerStoredProcedureParameter("p_ROL_NOMBRE", String.class, ParameterMode.OUT);
         query.registerStoredProcedureParameter("p_USU_CORRELATIVO", String.class, ParameterMode.OUT);
+        query.registerStoredProcedureParameter("p_EMP_ID", Integer.class, ParameterMode.OUT);
+        query.registerStoredProcedureParameter("p_EMP_NOMBRE", String.class, ParameterMode.OUT);
 
         query.setParameter("p_USU_EMAIL", email);
         query.setParameter("p_USU_PASSWORD", pass);
@@ -42,7 +44,9 @@ public class UsuarioService {
         Integer rolId= (Integer) query.getOutputParameterValue("p_ROL_ID");
         String rolNombre = (String) query.getOutputParameterValue("p_ROL_NOMBRE");
         String usuCorrelativo = (String) query.getOutputParameterValue("p_USU_CORRELATIVO");
-        return new Rol(rolId, rolNombre, usuCorrelativo);
+        Integer empId = (Integer) query.getOutputParameterValue("p_EMP_ID");
+        String empNombre = (String) query.getOutputParameterValue("p_EMP_NOMBRE");
+        return new Rol(rolId, rolNombre, usuCorrelativo, empId, empNombre);
     }
 
     /*public List<Rol> validarUsuario(String email, String pass) {
