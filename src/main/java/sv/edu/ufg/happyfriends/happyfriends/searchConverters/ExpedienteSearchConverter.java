@@ -43,8 +43,9 @@ public class ExpedienteSearchConverter {
     private String masTelefono;
     private String masMedReferido;
     private String masCorreo;
+    private Integer razId;
 
-    public ExpedienteSearchConverter(String masId, String masNombre, String timGrupo, String razNombre, String masColor, String masPropietario, Integer expId, Integer masGenero, String masPeso, String masTemperatura, String masFrecardiaca, String masDireccion, String masTelefono, String masMedReferido, String masCorreo) {
+    public ExpedienteSearchConverter(String masId, String masNombre, String timGrupo, String razNombre, String masColor, String masPropietario, Integer expId, Integer masGenero, String masPeso, String masTemperatura, String masFrecardiaca, String masDireccion, String masTelefono, String masMedReferido, String masCorreo, Integer razId) {
         this.masId = masId;
         this.masNombre = masNombre;
         this.timGrupo = timGrupo;
@@ -60,5 +61,6 @@ public class ExpedienteSearchConverter {
         this.masTelefono = masTelefono;
         this.masMedReferido = masMedReferido;
         this.masCorreo = masCorreo;
+        this.razId = razId;
     }
 }
