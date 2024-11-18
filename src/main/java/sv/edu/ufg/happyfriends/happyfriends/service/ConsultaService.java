@@ -8,6 +8,7 @@ import sv.edu.ufg.happyfriends.happyfriends.entity.Consulta;
 import sv.edu.ufg.happyfriends.happyfriends.entity.Expediente;
 import sv.edu.ufg.happyfriends.happyfriends.entityConverters.PostResponseConverter;
 import sv.edu.ufg.happyfriends.happyfriends.exceptionClass.CustomException;
+import sv.edu.ufg.happyfriends.happyfriends.searchConverters.ConsultaSearchConverter;
 import sv.edu.ufg.happyfriends.happyfriends.searchConverters.ExpedienteSearchConverter;
 
 import java.util.ArrayList;
@@ -61,9 +62,9 @@ public class ConsultaService {
     }
 
     @Transactional
-    public List<Consulta> buscarHistorialMedicoList(int expId) {
+    public List<ConsultaSearchConverter> buscarHistorialMedicoList(int expId) {
         // Llamada al NamedStoredProcedureQuery
-        List<Consulta> resultado=new ArrayList<Consulta>();
+        List<ConsultaSearchConverter> resultado=new ArrayList<ConsultaSearchConverter>();
         StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_get_historialMedico");
         query.registerStoredProcedureParameter("p_EXP_ID", Integer.class, ParameterMode.IN);
 
@@ -74,7 +75,8 @@ public class ConsultaService {
         if (!resultList.isEmpty()) {
             for (Object[] row : resultList) {
                 // Crear la instancia de ExpedienteSearchConverter
-                Consulta temp = new Consulta((String) row[0], (String) row[1], (String) row[2], (String) row[3], (String) row[4], (String) row[5]);
+                ConsultaSearchConverter temp = new ConsultaSearchConverter((String) row[0], (String) row[1], (String) row[2], (String) row[3],
+                        (String) row[4], (String) row[5], (String) row[6], (String) row[7], (String) row[8]);
                 // Agregar el resultado convertido a la lista
                 resultado.add(temp);
             }
