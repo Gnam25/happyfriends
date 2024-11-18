@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import sv.edu.ufg.happyfriends.happyfriends.entity.Consulta;
 import sv.edu.ufg.happyfriends.happyfriends.entity.Expediente;
 import sv.edu.ufg.happyfriends.happyfriends.entityConverters.PostResponseConverter;
+import sv.edu.ufg.happyfriends.happyfriends.searchConverters.ConsultaSearchConverter;
 import sv.edu.ufg.happyfriends.happyfriends.searchConverters.ExpedienteSearchConverter;
 import sv.edu.ufg.happyfriends.happyfriends.service.ConsultaService;
 
@@ -23,8 +24,8 @@ public class ConsultaController {
     }
 
     @GetMapping("/buscarHistorialMedico/{expId}")
-    public List<Consulta> buscarHistorialMedicoList(@PathVariable("expId") Integer expId) {
-        List<Consulta> consultas = consultaService.buscarHistorialMedicoList(expId);
+    public List<ConsultaSearchConverter> buscarHistorialMedicoList(@PathVariable("expId") Integer expId) {
+        List<ConsultaSearchConverter> consultas = consultaService.buscarHistorialMedicoList(expId);
         return consultas;
     }
 
