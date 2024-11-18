@@ -33,6 +33,9 @@ public class ConsultaService {
             query.registerStoredProcedureParameter("p_CON_DIAGNOSTICO", String.class, jakarta.persistence.ParameterMode.IN);
             query.registerStoredProcedureParameter("p_CON_EXAMENES", String.class, jakarta.persistence.ParameterMode.IN);
             query.registerStoredProcedureParameter("p_CON_OBSERVACIONES", String.class, jakarta.persistence.ParameterMode.IN);
+            query.registerStoredProcedureParameter("p_CON_PESO", String.class, jakarta.persistence.ParameterMode.IN);
+            query.registerStoredProcedureParameter("p_CON_TEMPERATURA", String.class, jakarta.persistence.ParameterMode.IN);
+            query.registerStoredProcedureParameter("p_CON_FRECARDIACA", String.class, jakarta.persistence.ParameterMode.IN);
             query.registerStoredProcedureParameter("p_USU_CODIGO", String.class, jakarta.persistence.ParameterMode.IN);
             query.registerStoredProcedureParameter("p_INSERT_RESPONSE", String.class, ParameterMode.OUT);
 
@@ -43,6 +46,9 @@ public class ConsultaService {
             query.setParameter("p_CON_DIAGNOSTICO", consulta.getConDiagnostico());
             query.setParameter("p_CON_EXAMENES", consulta.getConExamenes());
             query.setParameter("p_CON_OBSERVACIONES", consulta.getConObservaciones());
+            query.setParameter("p_CON_PESO", consulta.getConPeso());
+            query.setParameter("p_CON_TEMPERATURA", consulta.getConTemperatura());
+            query.setParameter("p_CON_FRECARDIACA", consulta.getConFrecardiaca());
             query.setParameter("p_USU_CODIGO", consulta.getUsuCodigo());
 
             // Ejecutar el procedimiento

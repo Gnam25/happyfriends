@@ -20,6 +20,9 @@ import lombok.Setter;
                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_CON_DIAGNOSTICO", type = String.class),
                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_CON_EXAMENES", type = String.class),
                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_CON_OBSERVACIONES", type = String.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_CON_PESO", type = String.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_CON_TEMPERATURA", type = String.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_CON_FRECARDIACA", type = String.class),
                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_USU_CODIGO", type = String.class),
                 @StoredProcedureParameter(mode = ParameterMode.OUT, name = "p_INSERT_RESPONSE", type = String.class)
         }
@@ -55,6 +58,18 @@ public class Consulta {
     @NotBlank
     @Column(nullable = false)
     private String conObservaciones;
+
+    @NotBlank
+    @Column(nullable = false)
+    private String conPeso;
+
+    @NotBlank
+    @Column(nullable = false)
+    private String conTemperatura;
+
+    @NotBlank
+    @Column(nullable = false)
+    private String conFrecardiaca;
 
     @NotBlank
     @Column(nullable = false)
