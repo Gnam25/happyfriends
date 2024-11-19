@@ -129,7 +129,7 @@ public class CitaService {
         if (!resultList.isEmpty()) {
             for (Object[] row : resultList) {
                 // Crear la instancia de CitaSearchConverter
-                CitaSearchConverter temp = new CitaSearchConverter((Integer) row[0], (Date) row[1], (Time) row[2], (String) row[3], (String) row[4], (Integer) row[5]);
+                CitaSearchConverter temp = new CitaSearchConverter((Integer) row[0], (Date) row[1], (Time) row[2], (String) row[3], (Integer) row[4], (String) row[5], (Integer) row[6]);
                 // Agregar el resultado convertido a la lista
                 resultado.add(temp);
             }

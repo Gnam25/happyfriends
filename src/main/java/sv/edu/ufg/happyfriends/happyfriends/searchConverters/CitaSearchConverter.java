@@ -33,6 +33,7 @@ public class CitaSearchConverter {
     @JsonDeserialize(using = CustomTimeDeserializer.class)
     private Time hora;
     private String propietario;
+    private Integer veterinarioId;
     private String veterinario;
     private String estadoIn;
     private Integer estado;
@@ -44,12 +45,13 @@ public class CitaSearchConverter {
         this.propietario = propietario;
     }
 
-    public CitaSearchConverter(Integer id, Date fecha, Time hora, String propietario, String veterinario, Integer estado) {
+    public CitaSearchConverter(Integer id, Date fecha, Time hora, String propietario, Integer veterinarioId, String veterinario, Integer estado) {
         this.id = id;
         this.fecha = fecha;
         this.hora = hora;
         this.propietario = propietario;
         this.veterinario = veterinario;
         this.estado = estado;
+        this.veterinarioId = veterinarioId;
     }
 }
