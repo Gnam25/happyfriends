@@ -3,10 +3,8 @@ package sv.edu.ufg.happyfriends.happyfriends.service;
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.connector.Response;
 import org.springframework.stereotype.Service;
 import sv.edu.ufg.happyfriends.happyfriends.entity.Cita;
-import sv.edu.ufg.happyfriends.happyfriends.entity.Rol;
 import sv.edu.ufg.happyfriends.happyfriends.exceptionClass.CustomException;
 import sv.edu.ufg.happyfriends.happyfriends.repository.CitaRepository;
 import sv.edu.ufg.happyfriends.happyfriends.searchConverters.CitaSearchConverter;
@@ -43,6 +41,7 @@ public class CitaService {
             query.registerStoredProcedureParameter("EMP_ID", Integer.class, jakarta.persistence.ParameterMode.IN);
             query.registerStoredProcedureParameter("FEC_ACTUAL", Date.class, jakarta.persistence.ParameterMode.IN);
             query.registerStoredProcedureParameter("USU_CODIGO", String.class, jakarta.persistence.ParameterMode.IN);
+
 
             // Establecer valores
             query.setParameter("CTA_CODIGO", cita.getCtaCodigo());

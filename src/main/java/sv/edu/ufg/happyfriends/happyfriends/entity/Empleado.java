@@ -6,9 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
-import java.util.List;
-
 @Entity
 @Getter
 @Setter
@@ -31,6 +28,14 @@ import java.util.List;
                         @ColumnResult(name = "empApellido", type = String.class)
                 }
         )
+)
+@NamedStoredProcedureQuery(
+        name = "sp_get_empleados",
+        procedureName = "sp_get_empleados",
+        resultSetMappings = "empleadosMap",
+        parameters = {
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_INCLUIR", type = Integer.class)
+        }
 )
 public class Empleado {
 

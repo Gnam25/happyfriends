@@ -21,4 +21,9 @@ public class EmpleadoController {
         return empleados;
     }
 
+    @GetMapping("/obtenerEmpleadosUsuario/{incluir}")
+    public List<Empleado> obtenerEmpleadoUsuarioList(@PathVariable("incluir") Integer incluirConUsuario) {
+        List<Empleado> empleados = empleadoService.obtenerEmpleadoUsuarioList(incluirConUsuario);
+        return empleados;
+    }
 }

@@ -1,7 +1,6 @@
 package sv.edu.ufg.happyfriends.happyfriends.service;
 
 
-import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

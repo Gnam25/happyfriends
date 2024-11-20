@@ -1,21 +1,13 @@
 package sv.edu.ufg.happyfriends.happyfriends.service;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.ParameterMode;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.StoredProcedureQuery;
+import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
-import sv.edu.ufg.happyfriends.happyfriends.entity.Permiso;
 import sv.edu.ufg.happyfriends.happyfriends.entity.Rol;
-import sv.edu.ufg.happyfriends.happyfriends.entityConverters.UsuarioConverter;
-import sv.edu.ufg.happyfriends.happyfriends.mappers.PermisoRowMapper;
-import sv.edu.ufg.happyfriends.happyfriends.mappers.RolRowMapper;
-
-import java.util.List;
+import sv.edu.ufg.happyfriends.happyfriends.entity.Usuario;
+import sv.edu.ufg.happyfriends.happyfriends.entityConverters.PostResponseConverter;
+import sv.edu.ufg.happyfriends.happyfriends.exceptionClass.CustomException;
 
 @Service
 @RequiredArgsConstructor
@@ -49,8 +41,43 @@ public class UsuarioService {
         return new Rol(rolId, rolNombre, usuCorrelativo, empId, empNombre);
     }
 
-    /*public List<Rol> validarUsuario(String email, String pass) {
-        String sql = "CALL sp_validar_usuario(?,?)";
-        return jdbcTemplate.query(sql, new Object[]{email, pass}, new RolRowMapper());
-    }*/
+    @Transactional
+    public PostResponseConverter insertUsuario(Usuario usuario) {
+        try {
+            StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_add_usuario");
+
+            // Registrar parámetros
+            query.registerStoredProcedureParameter("p_USU_EMAIL", String.class, jakarta.persistence.ParameterMode.IN);
+            query.registerStoredProcedureParameter("p_USU_PASSWORD", String.class, jakarta.persistence.ParameterMode.IN);
+            query.registerStoredProcedureParameter("p_USU_ESTADO", Integer.class, jakarta.persistence.ParameterMode.IN);
+            query.registerStoredProcedureParameter("p_EMP_ID", Integer.class, jakarta.persistence.ParameterMode.IN);
+            query.registerStoredProcedureParameter("p_ARC_ID", Integer.class, jakarta.persistence.ParameterMode.IN);
+            query.registerStoredProcedureParameter("p_ROL_ID", Integer.class, jakarta.persistence.ParameterMode.IN);
+            query.registerStoredProcedureParameter("p_USU_CODIGO", String.class, jakarta.persistence.ParameterMode.IN);
+            query.registerStoredProcedureParameter("p_INSERT_RESPONSE", String.class, ParameterMode.OUT);
+
+            // Establecer valores
+            query.setParameter("p_USU_EMAIL", usuario.getUsuEmail());
+            query.setParameter("p_USU_PASSWORD", usuario.getUsuPassword());
+            query.setParameter("p_USU_ESTADO", usuario.getUsuEstado());
+            query.setParameter("p_EMP_ID", usuario.getEmpId());
+            query.setParameter("p_ARC_ID", usuario.getArcId());
+            query.setParameter("p_ROL_ID", usuario.getRolId());
+            query.setParameter("p_USU_CODIGO", usuario.getUsuCodigo());
+
+            // Ejecutar el procedimiento
+            query.execute();
+
+            String repuesta = (String) query.getOutputParameterValue("p_INSERT_RESPONSE");
+            return new PostResponseConverter("", repuesta);
+
+
+        } catch (PersistenceException ex) {
+            // Manejar errores de la base de datos, como problemas de conexión o constraints
+            throw new CustomException("Error al insertar la usuario en la base de datos, causa: ", ex);
+        } catch (Exception ex) {
+            // Manejar cualquier otra excepción
+            throw new CustomException("Error inesperado al insertar usuario, causa: ", ex);
+        }
+    }
 }

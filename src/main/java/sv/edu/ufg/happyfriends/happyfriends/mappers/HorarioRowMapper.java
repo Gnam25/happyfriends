@@ -5,9 +5,6 @@ import sv.edu.ufg.happyfriends.happyfriends.entity.HorarioCita;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class HorarioRowMapper implements RowMapper<HorarioCita> {
     @Override
