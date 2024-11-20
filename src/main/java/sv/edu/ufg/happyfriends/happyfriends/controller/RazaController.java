@@ -3,9 +3,7 @@ package sv.edu.ufg.happyfriends.happyfriends.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import sv.edu.ufg.happyfriends.happyfriends.entity.Raza;
-import sv.edu.ufg.happyfriends.happyfriends.entity.TipoMascota;
 import sv.edu.ufg.happyfriends.happyfriends.service.RazaService;
-import sv.edu.ufg.happyfriends.happyfriends.service.TipoMascotaService;
 
 import java.util.List;
 

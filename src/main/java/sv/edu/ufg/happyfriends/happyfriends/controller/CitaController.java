@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sv.edu.ufg.happyfriends.happyfriends.entity.Cita;
-import sv.edu.ufg.happyfriends.happyfriends.entity.Empleado;
 import sv.edu.ufg.happyfriends.happyfriends.searchConverters.CitaSearchConverter;
 import sv.edu.ufg.happyfriends.happyfriends.service.CitaService;
 

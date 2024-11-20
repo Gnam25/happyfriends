@@ -1,11 +1,8 @@
 package sv.edu.ufg.happyfriends.happyfriends.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import sv.edu.ufg.happyfriends.happyfriends.entity.Expediente;
 import sv.edu.ufg.happyfriends.happyfriends.entity.Permiso;
-import sv.edu.ufg.happyfriends.happyfriends.service.ExpedienteService;
 import sv.edu.ufg.happyfriends.happyfriends.service.PermisosService;
 
 import java.util.List;

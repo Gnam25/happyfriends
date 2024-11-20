@@ -1,8 +1,6 @@
 package sv.edu.ufg.happyfriends.happyfriends.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import sv.edu.ufg.happyfriends.happyfriends.entity.Sucursal;
 import sv.edu.ufg.happyfriends.happyfriends.repository.SucursalRepository;
