@@ -3,10 +3,7 @@ package sv.edu.ufg.happyfriends.happyfriends.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import sv.edu.ufg.happyfriends.happyfriends.entity.HorarioCita;
-import sv.edu.ufg.happyfriends.happyfriends.entity.Permiso;
-import sv.edu.ufg.happyfriends.happyfriends.entityConverters.UsuarioConverter;
 import sv.edu.ufg.happyfriends.happyfriends.service.HorarioCitaService;
-import sv.edu.ufg.happyfriends.happyfriends.service.PermisosService;
 
 import java.util.List;
 

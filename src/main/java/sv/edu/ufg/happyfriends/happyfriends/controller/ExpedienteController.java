@@ -1,12 +1,9 @@
 package sv.edu.ufg.happyfriends.happyfriends.controller;
 
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sv.edu.ufg.happyfriends.happyfriends.entity.Expediente;
 import sv.edu.ufg.happyfriends.happyfriends.entityConverters.PostResponseConverter;
-import sv.edu.ufg.happyfriends.happyfriends.searchConverters.CitaSearchConverter;
 import sv.edu.ufg.happyfriends.happyfriends.searchConverters.ExpedienteSearchConverter;
 import sv.edu.ufg.happyfriends.happyfriends.service.ExpedienteService;
 

@@ -1,13 +1,10 @@
 package sv.edu.ufg.happyfriends.happyfriends.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import sv.edu.ufg.happyfriends.happyfriends.utils.CustomTimeDeserializer;
 
 import java.sql.Time;
 import java.util.Date;

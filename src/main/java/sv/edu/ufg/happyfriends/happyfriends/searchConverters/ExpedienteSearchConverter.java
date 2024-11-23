@@ -1,17 +1,11 @@
 package sv.edu.ufg.happyfriends.happyfriends.searchConverters;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.persistence.NamedStoredProcedureQuery;
 import jakarta.persistence.ParameterMode;
 import jakarta.persistence.StoredProcedureParameter;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import sv.edu.ufg.happyfriends.happyfriends.utils.CustomDateDeserializer;
-import sv.edu.ufg.happyfriends.happyfriends.utils.CustomTimeDeserializer;
-
-import java.sql.Time;
-import java.util.Date;
 
 @Getter
 @Setter

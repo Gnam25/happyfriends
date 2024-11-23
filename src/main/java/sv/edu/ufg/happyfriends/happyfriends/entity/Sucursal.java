@@ -1,16 +1,11 @@
 package sv.edu.ufg.happyfriends.happyfriends.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-/*import javax.persistence.*;
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.NotBlank;*/
-import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity

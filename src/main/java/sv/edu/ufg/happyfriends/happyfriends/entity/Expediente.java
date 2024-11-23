@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.sql.Time;
 import java.util.Date;
 
 @Entity
@@ -58,9 +57,7 @@ import java.util.Date;
 public class Expediente {
 
     @Id
-    //@SequenceGenerator(name = "sucursal_id_seq", sequenceName = "sucursal_id_seq", allocationSize = 1)
-    //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sucursal_id_seq")
-    private Integer sucId;
+    private Integer expId;
 
     @NotBlank
     @Column(nullable = false)

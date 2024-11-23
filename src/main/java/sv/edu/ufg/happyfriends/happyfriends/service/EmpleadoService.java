@@ -5,7 +5,6 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.StoredProcedureQuery;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sv.edu.ufg.happyfriends.happyfriends.entity.Empleado;
 import sv.edu.ufg.happyfriends.happyfriends.repository.EmpleadoRepository;
@@ -26,6 +25,14 @@ public class EmpleadoService {
         // Llamada al NamedStoredProcedureQuery
         StoredProcedureQuery query = entityManager.createNamedStoredProcedureQuery("sp_get_veterinario");
         query.setParameter("p_PUE_ID", pueId);
+        return query.getResultList();
+    }
+
+    @Transactional
+    public List<Empleado> obtenerEmpleadoUsuarioList(Integer incluirConUsuario) {
+        // Llamada al NamedStoredProcedureQuery
+        StoredProcedureQuery query = entityManager.createNamedStoredProcedureQuery("sp_get_empleados");
+        query.setParameter("p_INCLUIR", incluirConUsuario);
         return query.getResultList();
     }
 }

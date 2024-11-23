@@ -3,23 +3,14 @@ package sv.edu.ufg.happyfriends.happyfriends.service;
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sv.edu.ufg.happyfriends.happyfriends.entity.Cita;
 import sv.edu.ufg.happyfriends.happyfriends.entity.Expediente;
-import sv.edu.ufg.happyfriends.happyfriends.entity.Rol;
 import sv.edu.ufg.happyfriends.happyfriends.entityConverters.PostResponseConverter;
 import sv.edu.ufg.happyfriends.happyfriends.exceptionClass.CustomException;
 import sv.edu.ufg.happyfriends.happyfriends.repository.ExpedienteRepository;
-import sv.edu.ufg.happyfriends.happyfriends.repository.SucursalRepository;
-import sv.edu.ufg.happyfriends.happyfriends.searchConverters.CitaSearchConverter;
 import sv.edu.ufg.happyfriends.happyfriends.searchConverters.ExpedienteSearchConverter;
 
-import java.sql.Time;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 @Service
