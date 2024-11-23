@@ -11,35 +11,13 @@ import lombok.Setter;
 import sv.edu.ufg.happyfriends.happyfriends.utils.CustomDateDeserializer;
 
 import java.util.Date;
+import java.util.List;
 
-@Entity
+//@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 public class Tratamiento {
-    @Id
-    private Integer trtId;
-
-    @NotBlank
-    @Column(nullable = false)
-    private String trtMedicamento;
-
-    @NotBlank
-    @Column(nullable = false)
-    private String trtDosis;
-
-    @NotBlank
-    @Column(nullable = false)
-    private String trtFrecuencia;
-
-    @NotBlank
-    @Column(nullable = false)
-    private String trtDuracion;
-
-    @NotBlank
-    @Column(nullable = false)
-    @JsonDeserialize(using = CustomDateDeserializer.class)
-    private Date trtFecInicio;
 
     @NotBlank
     @Column(nullable = false)
@@ -48,4 +26,36 @@ public class Tratamiento {
     @NotBlank
     @Column(nullable = false)
     private String usuCodigo;
+
+    private List<TratamientoDetalle> tratamientoDetalle;
+
+
+    @Getter
+    @Setter
+    public static class TratamientoDetalle {
+        @Id
+        private Integer trtId;
+
+        @NotBlank
+        @Column(nullable = false)
+        private String trtMedicamento;
+
+        @NotBlank
+        @Column(nullable = false)
+        private String trtDosis;
+
+        @NotBlank
+        @Column(nullable = false)
+        private String trtFrecuencia;
+
+        @NotBlank
+        @Column(nullable = false)
+        private String trtDuracion;
+
+        @NotBlank
+        @Column(nullable = false)
+        @JsonDeserialize(using = CustomDateDeserializer.class)
+        private Date trtFecInicio;
+
+    }
 }

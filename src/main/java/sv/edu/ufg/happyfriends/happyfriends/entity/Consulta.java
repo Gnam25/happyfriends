@@ -45,6 +45,9 @@ import java.util.Date;
                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_CON_DIAGNOSTICO", type = String.class),
                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_CON_EXAMENES", type = String.class),
                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_CON_OBSERVACIONES", type = String.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_CON_PESO", type = String.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_CON_TEMPERATURA", type = String.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_CON_FRECARDIACA", type = String.class),
                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_USU_CODIGO", type = String.class),
                 @StoredProcedureParameter(mode = ParameterMode.OUT, name = "p_INSERT_RESPONSE", type = String.class)
         }
