@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Entity
 @Getter
 @Setter
@@ -32,6 +34,43 @@ import lombok.Setter;
         procedureName = "sp_get_historialMedico",
         parameters = {
                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_EXP_ID", type = Integer.class)
+        }
+)
+@NamedStoredProcedureQuery(
+        name = "sp_update_consulta",
+        procedureName = "sp_update_consulta",
+        parameters = {
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_CON_ID", type = Integer.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_CON_SINTOMAS", type = String.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_CON_DIAGNOSTICO", type = String.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_CON_EXAMENES", type = String.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_CON_OBSERVACIONES", type = String.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_USU_CODIGO", type = String.class),
+                @StoredProcedureParameter(mode = ParameterMode.OUT, name = "p_INSERT_RESPONSE", type = String.class)
+        }
+)
+@NamedStoredProcedureQuery(
+        name = "sp_add_tratamiento",
+        procedureName = "sp_add_tratamiento",
+        parameters = {
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_CON_ID", type = Integer.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_TRT_MEDICAMENTO", type = String.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_TRT_DOSIS", type = String.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_TRT_FRECUENCIA", type = String.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_TRT_DURACION", type = String.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_TRT_FECINICIO", type = Date.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_USU_CODIGO", type = String.class),
+                @StoredProcedureParameter(mode = ParameterMode.OUT, name = "p_INSERT_RESPONSE", type = String.class)
+        }
+)
+@NamedStoredProcedureQuery(
+        name = "sp_add_examen_resultado",
+        procedureName = "sp_add_examen_resultado",
+        parameters = {
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_CON_ID", type = Integer.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_EXR_RESULTADO", type = String.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_USU_CODIGO", type = String.class),
+                @StoredProcedureParameter(mode = ParameterMode.OUT, name = "p_INSERT_RESPONSE", type = String.class)
         }
 )
 public class Consulta {
