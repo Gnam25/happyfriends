@@ -82,8 +82,8 @@ public class ConsultaService {
         if (!resultList.isEmpty()) {
             for (Object[] row : resultList) {
                 // Crear la instancia de ExpedienteSearchConverter
-                ConsultaSearchConverter temp = new ConsultaSearchConverter((String) row[0], (String) row[1], (String) row[2], (String) row[3],
-                        (String) row[4], (String) row[5], (String) row[6], (String) row[7], (String) row[8]);
+                ConsultaSearchConverter temp = new ConsultaSearchConverter((Integer) row[0], (String) row[1], (String) row[2], (String) row[3],
+                        (String) row[4], (String) row[5], (String) row[6], (String) row[7], (String) row[8], (String) row[9]);
                 // Agregar el resultado convertido a la lista
                 resultado.add(temp);
             }
