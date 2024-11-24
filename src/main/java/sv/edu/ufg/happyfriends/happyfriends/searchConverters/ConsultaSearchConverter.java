@@ -6,6 +6,11 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import sv.edu.ufg.happyfriends.happyfriends.entity.Tratamiento;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -62,6 +67,8 @@ public class ConsultaSearchConverter {
     @Column(nullable = false)
     private String masFreCardiaca;
 
+    private List<TratamientoSearchConverter> tratamientos;
+
     public ConsultaSearchConverter(Integer conId, String conFecConsulta, String conSintomas, String conDiagnostico, String conExamenes,
                                    String conObservaciones, String empNombre, String masPeso, String masTemperatura, String masFreCardiaca) {
         this.conFecConsulta = conFecConsulta;
@@ -74,5 +81,13 @@ public class ConsultaSearchConverter {
         this.masTemperatura = masTemperatura;
         this.masFreCardiaca = masFreCardiaca;
         this.conId = conId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ConsultaSearchConverter that = (ConsultaSearchConverter) o;
+        return Objects.equals(conId, that.conId); // Compara los atributos relevantes
     }
 }
