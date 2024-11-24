@@ -62,7 +62,7 @@ public class ConsultaSearchConverter {
     @Column(nullable = false)
     private String masFreCardiaca;
 
-    public ConsultaSearchConverter(String conFecConsulta, String conSintomas, String conDiagnostico, String conExamenes,
+    public ConsultaSearchConverter(Integer conId, String conFecConsulta, String conSintomas, String conDiagnostico, String conExamenes,
                                    String conObservaciones, String empNombre, String masPeso, String masTemperatura, String masFreCardiaca) {
         this.conFecConsulta = conFecConsulta;
         this.conSintomas = conSintomas;
@@ -73,5 +73,6 @@ public class ConsultaSearchConverter {
         this.masPeso = masPeso;
         this.masTemperatura = masTemperatura;
         this.masFreCardiaca = masFreCardiaca;
+        this.conId = conId;
     }
 }
