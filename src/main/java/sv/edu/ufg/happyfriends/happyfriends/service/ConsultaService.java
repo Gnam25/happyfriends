@@ -10,6 +10,7 @@ import sv.edu.ufg.happyfriends.happyfriends.entity.Tratamiento;
 import sv.edu.ufg.happyfriends.happyfriends.entityConverters.PostResponseConverter;
 import sv.edu.ufg.happyfriends.happyfriends.exceptionClass.CustomException;
 import sv.edu.ufg.happyfriends.happyfriends.searchConverters.ConsultaSearchConverter;
+import sv.edu.ufg.happyfriends.happyfriends.searchConverters.TratamientoSearchConverter;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -72,6 +73,7 @@ public class ConsultaService {
     public List<ConsultaSearchConverter> buscarHistorialMedicoList(int expId) {
         // Llamada al NamedStoredProcedureQuery
         List<ConsultaSearchConverter> resultado=new ArrayList<ConsultaSearchConverter>();
+        List<TratamientoSearchConverter> tratamientos=new ArrayList<TratamientoSearchConverter>();
         StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_get_historialMedico");
         query.registerStoredProcedureParameter("p_EXP_ID", Integer.class, ParameterMode.IN);
 
@@ -81,11 +83,19 @@ public class ConsultaService {
         List<Object[]> resultList = query.getResultList();
         if (!resultList.isEmpty()) {
             for (Object[] row : resultList) {
-                // Crear la instancia de ExpedienteSearchConverter
-                ConsultaSearchConverter temp = new ConsultaSearchConverter((Integer) row[0], (String) row[1], (String) row[2], (String) row[3],
-                        (String) row[4], (String) row[5], (String) row[6], (String) row[7], (String) row[8], (String) row[9]);
-                // Agregar el resultado convertido a la lista
-                resultado.add(temp);
+                TratamientoSearchConverter tratamiento = new TratamientoSearchConverter((Integer) row[10], (String) row[11], (String) row[12], (String) row[13], (String) row[14], (Date) row[15]);
+                tratamientos.add(tratamiento);
+            }
+            for (Object[] row : resultList) {
+                    // Crear la instancia de ExpedienteSearchConverter
+                    ConsultaSearchConverter temp = new ConsultaSearchConverter((Integer) row[0], (String) row[1], (String) row[2], (String) row[3],
+                            (String) row[4], (String) row[5], (String) row[6], (String) row[7], (String) row[8], (String) row[9]);
+                    temp.setTratamientos(tratamientos);
+                // Validar si ya existe en la lista
+                if (!resultado.contains(temp)) {
+                    // Agregar el resultado convertido a la lista
+                    resultado.add(temp);
+                }
             }
         }
         return resultado;
@@ -138,9 +148,9 @@ public class ConsultaService {
     @Transactional
     public PostResponseConverter insertTratamiento(Tratamiento tratamiento) {
         try {
-            Integer consulaID=tratamiento.getConId();
+            Integer consulaID=tratamiento.getConId(), okCount=0, koCount=0;
             String usuCodigo=tratamiento.getUsuCodigo();
-            String finalResponse="", responsesOK="", responsesKO="";
+            String finalResponse="";
             for (Tratamiento.TratamientoDetalle tratamientoDetalle : tratamiento.getTratamientoDetalle()) {
                 StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_add_tratamiento");
 
@@ -167,22 +177,18 @@ public class ConsultaService {
                 query.execute();
 
                 String respuesta = (String) query.getOutputParameterValue("p_INSERT_RESPONSE");
+
                 if (respuesta.contains("Tratamiento medico guardado exitosamente")){
-                    if (responsesOK.equals("")){
-                        responsesOK+= tratamientoDetalle.getTrtMedicamento();
-                    }else{
-                        responsesOK+= ", " + tratamientoDetalle.getTrtMedicamento();
-                    }
+                    okCount+=1;
                 }else {
-                    if (responsesKO.equals("")){
-                        responsesKO+= respuesta+" " + tratamientoDetalle.getTrtMedicamento();
-                    }else{
-                        responsesKO+= ", "+respuesta+" " + tratamientoDetalle.getTrtMedicamento();
-                    }
+                    koCount+=1;
                 }
             }
-            responsesOK="Tratamientos "+responsesOK+" guardados";
-            finalResponse+=responsesOK+responsesKO;
+            if (okCount==tratamiento.getTratamientoDetalle().size()){
+                finalResponse="Tratamientos guardados exitosamente";
+            }else{
+                finalResponse="Hubieron algunos errores al guardar algunos tratamientos";
+            }
             return new PostResponseConverter("", finalResponse);
         } catch (PersistenceException ex) {
             // Manejar errores de la base de datos, como problemas de conexión o constraints
@@ -193,45 +199,6 @@ public class ConsultaService {
         }
     }
 
-    /*@Transactional
-    public PostResponseConverter insertTratamiento(Tratamiento tratamiento) {
-        try {
-            StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_add_tratamiento");
-
-            // Registrar parámetros
-            query.registerStoredProcedureParameter("p_CON_ID", Integer.class, jakarta.persistence.ParameterMode.IN);
-            query.registerStoredProcedureParameter("p_TRT_MEDICAMENTO", String.class, jakarta.persistence.ParameterMode.IN);
-            query.registerStoredProcedureParameter("p_TRT_DOSIS", String.class, jakarta.persistence.ParameterMode.IN);
-            query.registerStoredProcedureParameter("p_TRT_FRECUENCIA", String.class, jakarta.persistence.ParameterMode.IN);
-            query.registerStoredProcedureParameter("p_TRT_DURACION", String.class, jakarta.persistence.ParameterMode.IN);
-            query.registerStoredProcedureParameter("p_TRT_FECINICIO", Date.class, jakarta.persistence.ParameterMode.IN);
-            query.registerStoredProcedureParameter("p_USU_CODIGO", String.class, jakarta.persistence.ParameterMode.IN);
-            query.registerStoredProcedureParameter("p_INSERT_RESPONSE", String.class, ParameterMode.OUT);
-
-            // Establecer valores
-            query.setParameter("p_CON_ID", tratamiento.getConId());
-            query.setParameter("p_TRT_MEDICAMENTO", tratamiento.getTrtMedicamento());
-            query.setParameter("p_TRT_DOSIS", tratamiento.getTrtDosis());
-            query.setParameter("p_TRT_FRECUENCIA", tratamiento.getTrtFrecuencia());
-            query.setParameter("p_TRT_DURACION", tratamiento.getTrtDuracion());
-            query.setParameter("p_TRT_FECINICIO", tratamiento.getTrtFecInicio());
-            query.setParameter("p_USU_CODIGO", tratamiento.getUsuCodigo());
-
-            // Ejecutar el procedimiento
-            query.execute();
-
-            String repuesta = (String) query.getOutputParameterValue("p_INSERT_RESPONSE");
-            return new PostResponseConverter("", repuesta);
-
-
-        } catch (PersistenceException ex) {
-            // Manejar errores de la base de datos, como problemas de conexión o constraints
-            throw new CustomException("Error al insertar el tratamiento medico en la base de datos, causa: ", ex);
-        } catch (Exception ex) {
-            // Manejar cualquier otra excepción
-            throw new CustomException("Error inesperado al insertar tratamiento medico, causa: ", ex);
-        }
-    }*/
     @Transactional
     public PostResponseConverter insertResultadoExamen(ExamenResultado examen) {
         try {
