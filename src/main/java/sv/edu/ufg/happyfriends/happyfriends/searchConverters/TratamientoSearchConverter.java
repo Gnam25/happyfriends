@@ -36,12 +36,15 @@ public class TratamientoSearchConverter {
     @Column(nullable = false)
     private Date trtFecInicio;
 
-    public TratamientoSearchConverter(Integer trtId, String trtMedicamento, String trtDosis, String trtFrecuencia, String trtDuracion, Date trtFecInicio) {
+    private Integer conId;
+
+    public TratamientoSearchConverter(Integer trtId, String trtMedicamento, String trtDosis, String trtFrecuencia, String trtDuracion, Date trtFecInicio, Integer conId) {
         this.trtId = trtId;
         this.trtMedicamento = trtMedicamento;
         this.trtDosis = trtDosis;
         this.trtFrecuencia = trtFrecuencia;
         this.trtDuracion = trtDuracion;
         this.trtFecInicio = trtFecInicio;
+        this.conId = conId;
     }
 }
