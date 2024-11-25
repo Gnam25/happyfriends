@@ -12,9 +12,7 @@ import sv.edu.ufg.happyfriends.happyfriends.exceptionClass.CustomException;
 import sv.edu.ufg.happyfriends.happyfriends.searchConverters.ConsultaSearchConverter;
 import sv.edu.ufg.happyfriends.happyfriends.searchConverters.TratamientoSearchConverter;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -72,8 +70,8 @@ public class ConsultaService {
     @Transactional
     public List<ConsultaSearchConverter> buscarHistorialMedicoList(int expId) {
         // Llamada al NamedStoredProcedureQuery
-        List<ConsultaSearchConverter> resultado=new ArrayList<ConsultaSearchConverter>();
-        List<TratamientoSearchConverter> tratamientos=new ArrayList<TratamientoSearchConverter>();
+        List<ConsultaSearchConverter> resultado=new ArrayList<ConsultaSearchConverter>(), consultasTemp=new ArrayList<ConsultaSearchConverter>();
+        Map<Integer, TratamientoSearchConverter> tratamientos= new HashMap<Integer, TratamientoSearchConverter>();
         StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_get_historialMedico");
         query.registerStoredProcedureParameter("p_EXP_ID", Integer.class, ParameterMode.IN);
 
@@ -83,20 +81,39 @@ public class ConsultaService {
         List<Object[]> resultList = query.getResultList();
         if (!resultList.isEmpty()) {
             for (Object[] row : resultList) {
-                TratamientoSearchConverter tratamiento = new TratamientoSearchConverter((Integer) row[10], (String) row[11], (String) row[12], (String) row[13], (String) row[14], (Date) row[15]);
-                tratamientos.add(tratamiento);
+                TratamientoSearchConverter tratamiento = new TratamientoSearchConverter((Integer) row[10], (String) row[11], (String) row[12], (String) row[13], (String) row[14], (Date) row[15], (Integer) row[0]);
+                tratamientos.put((Integer) row[10], tratamiento);
             }
             for (Object[] row : resultList) {
-                    // Crear la instancia de ExpedienteSearchConverter
-                    ConsultaSearchConverter temp = new ConsultaSearchConverter((Integer) row[0], (String) row[1], (String) row[2], (String) row[3],
-                            (String) row[4], (String) row[5], (String) row[6], (String) row[7], (String) row[8], (String) row[9]);
-                    temp.setTratamientos(tratamientos);
-                // Validar si ya existe en la lista
-                if (!resultado.contains(temp)) {
-                    // Agregar el resultado convertido a la lista
-                    resultado.add(temp);
+                ConsultaSearchConverter consultaIn = new ConsultaSearchConverter((Integer) row[0], (String) row[1], (String) row[2], (String) row[3],
+                        (String) row[4], (String) row[5], (String) row[6], (String) row[7], (String) row[8], (String) row[9]);
+                if (!consultasTemp.contains(consultaIn)) {
+                    List<TratamientoSearchConverter> tratamientosTemporales=new ArrayList<TratamientoSearchConverter>();
+                    for (Map.Entry<Integer, TratamientoSearchConverter> entry : tratamientos.entrySet()) {
+                        TratamientoSearchConverter tratamiento = entry.getValue(); // Valor
+                        if (tratamiento.getConId()==consultaIn.getConId() && !tratamientosTemporales.contains(tratamiento)){
+                            tratamientosTemporales.add(tratamiento);
+                        }
+                    }
+                    consultaIn.setTratamientos(tratamientosTemporales);
+                    consultasTemp.add(consultaIn);
+                }else{
+                    ConsultaSearchConverter consultaAdded = consultasTemp.get(consultasTemp.indexOf(consultaIn));
+                    consultasTemp.remove(consultaAdded);
+                    List<TratamientoSearchConverter> tratamientosTemporales=new ArrayList<TratamientoSearchConverter>();
+                    tratamientosTemporales.addAll(consultaAdded.getTratamientos());
+                    for (Map.Entry<Integer, TratamientoSearchConverter> entry : tratamientos.entrySet()) {
+                        TratamientoSearchConverter tratamiento = entry.getValue(); // Valor
+                        if (tratamiento.getConId()==consultaAdded.getConId() && !tratamientosTemporales.contains(tratamiento)) {
+                            tratamientosTemporales.add(tratamiento);
+                        }
+                    }
+                    consultaAdded.setTratamientos(tratamientosTemporales);
+                    consultasTemp.add(consultaAdded);
                 }
+
             }
+            resultado.addAll(consultasTemp);
         }
         return resultado;
     }
